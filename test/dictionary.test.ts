@@ -1,9 +1,11 @@
+require('dotenv').config()
 import {Dictionary} from '../src/dictionary'
 import * as fireAdmin from 'firebase-admin'
+const serviceAccount = require('./serviceAccount')
 
 const firebaseApp = fireAdmin.initializeApp({
-  databaseURL: 'https://q8732.firebaseio.com/',
-  credential: fireAdmin.credential.cert(require(process.env.DEV ? '../.env/serviceAccount.json' : './firebase.account')), // eslint-disable-line
+  databaseURL: serviceAccount.databaseURL,
+  credential: fireAdmin.credential.cert(serviceAccount),
 });
 const root = firebaseApp.database().ref();
 
