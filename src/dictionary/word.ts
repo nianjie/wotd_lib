@@ -1,7 +1,7 @@
 export interface OxfordEntry {
   updated: string[]
   title: string[]
-  [x: string]: string[]
+  link: any[]
 }
 
 export interface Word {
@@ -31,7 +31,7 @@ export class Word {
       && updatedday.getDate() === theday.getDate()) {
       const title = feedentry.title[0];
       const updated = feedentry.updated[0];
-      const link = feedentry['feedburner:origLink'][0];
+      const {href:link} = feedentry.link[0].$;
       const definition = title;
       return new Word({title, updated, link, definition})
     }
